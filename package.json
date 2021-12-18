@@ -1,0 +1,36 @@
+{
+  "name": "yaduil",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Yet another dynamic UI library. No external dependencies, JSX and template support and proxy-based reactivity. Inspired by Vue 3",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixldemon/yaduil"
+  },
+  "scripts": {
+    "build": "tsc --skipLibCheck",
+    "watch": "tsc -w --skipLibCheck"
+  },
+  "keywords": [
+    "front-end framework",
+    "mvc",
+    "view-layer",
+    "reacive",
+    "vue",
+    "vue-like",
+    "lightweight",
+    "zero-dependency"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "naivdom": "^0.0.4",
+    "respondix": "^0.0.4",
+    "tinytemplatec": "^0.0.3"
+  }
+}
