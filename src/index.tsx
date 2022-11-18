@@ -23,7 +23,7 @@ export class Component {
 	mount($el: HTMLElement | string) {
 		if (typeof $el === 'string')
 			$el = document.querySelector($el) as HTMLElement;
-		console.assert($el, 'Mountpoint not found')
+		console.assert(!!$el, 'Mountpoint not found')
 
 		if (this.vroot?.$el !== $el)
 			$el.innerHTML = ''
@@ -47,7 +47,9 @@ export class Component {
 		const old = this.vroot
 		this.vroot = this.render(createVNode)
 		if (this.mountpoint) {
-			const index = this.mountpoint.parentElement ? Array.prototype.indexOf.call(this.mountpoint.parentElement.children, this.mountpoint) : -1
+			const index = this.mountpoint.parentElement ?
+				Array.prototype.indexOf.call(this.mountpoint.parentElement.children, this.mountpoint)
+				: -1
 			const diffs = diff(old, this.vroot, index)
 			if (diffs.length) patch(this.mountpoint, diffs)
 		}
@@ -83,7 +85,6 @@ defineDirective('y-for', (value, compiled) => {
 	const match = /(\w+),?\s+(\w*)\s*in\s*(\S+)/.exec(value)
 	if (!match) throw new Error('Invalid y-for: ' + value)
 	const [, varName, indexName, arrName] = match
-	console.log(arrName, varName)
 	return `${arrName}.map((${varName}, ${indexName}) => ${compiled()})`
 })
 defineDirective('y-if', (value, compiled) => {
@@ -96,6 +97,7 @@ const compilerDefaults = {
 	interpolationRegex: /{{(.+)}}/g,
 	dataBindingRegex: /:(\S+)/,
 }
+
 export function template(template: string, options = {}) {
 	return compiler.compile(template, { ...compilerDefaults, ...options })
 }
